@@ -1,6 +1,6 @@
 # Frontend Mentor - Age calculator app
 
-![Design preview for the Age calculator app coding challenge](./design/desktop-preview.jpg)
+![Design preview for the Age calculator app coding challenge](https://github.com/michellepennat/ageCalculator/blob/main/public/desktop-design.jpg)
 
 ## Welcome! 👋
 

@@ -2,10 +2,15 @@ import Head from "next/head";
 import Image from "next/image";
 import { Poppins } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import iconSVG from "../public/icon-arrow.svg";
 
-const poppins = Poppins({
+const poppins700 = Poppins({
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "800", "900"],
+  weight: ["700"],
+});
+const poppins800 = Poppins({
+  subsets: ["latin"],
+  weight: ["800"],
 });
 
 export default function Home() {
@@ -18,7 +23,72 @@ export default function Home() {
         <link rel="icon" href="/favicon-32x32.png" />
       </Head>
       <main className={styles.main}>
-
+        <h1>Age calculator</h1>
+        <section className={styles.card}>
+          <form action="" className={styles.form}>
+            <div>
+              <label htmlFor="day" className={poppins700.className}>
+                Day
+              </label>
+              <input
+                className={poppins700.className}
+                type="number"
+                placeholder="DD"
+              />
+            </div>
+            <div>
+              <label htmlFor="month" className={poppins700.className}>
+                Month
+              </label>
+              <input
+                className={poppins700.className}
+                type="number"
+                placeholder="MM"
+              />
+            </div>
+            <div>
+              <label htmlFor="year" className={poppins700.className}>
+                Year
+              </label>
+              <input
+                className={poppins700.className}
+                type="number"
+                placeholder="YYYY"
+              />
+            </div>
+          </form>
+          <div className={styles.button}>
+            <hr color="#dcdcdc" />
+            <button>
+              <Image src={iconSVG} alt="Arrow" />
+            </button>
+            <hr color="#dcdcdc" />
+          </div>
+          <div className={styles.text}>
+            <h2 className={poppins800.className}>--</h2>{" "}
+            <h3 className={poppins800.className}>years</h3>
+          </div>
+          <div className={styles.text}>
+            <h2 className={poppins800.className}>--</h2>{" "}
+            <h3 className={poppins800.className}>months</h3>
+          </div>
+          <div className={styles.text}>
+            <h2 className={poppins800.className}>--</h2>{" "}
+            <h3 className={poppins800.className}>days</h3>
+          </div>
+        </section>
+        <div className={styles.attribution}>
+          Challenge by
+          <a
+            href="https://www.frontendmentor.io/challenges/results-summary-component-CE_K6s0maV"
+            target="_blank"
+          >
+            {" "}
+            Frontend Mentor
+          </a>
+          . Coded by{" "}
+          <a href="https://github.com/michellepennat">Michelle Penna</a>.
+        </div>
       </main>
     </>
   );

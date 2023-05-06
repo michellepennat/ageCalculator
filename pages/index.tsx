@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Poppins } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import iconSVG from "../public/icon-arrow.svg";
+import useHome from "./hooks";
 
 const poppins700 = Poppins({
   subsets: ["latin"],
@@ -14,6 +15,7 @@ const poppins800 = Poppins({
 });
 
 export default function Home() {
+  const { submit } = useHome();
   return (
     <>
       <Head>
@@ -31,6 +33,8 @@ export default function Home() {
                 Day
               </label>
               <input
+                id="day"
+                name="day"
                 className={poppins700.className}
                 type="number"
                 placeholder="DD"
@@ -41,6 +45,8 @@ export default function Home() {
                 Month
               </label>
               <input
+                id="month"
+                name="month"
                 className={poppins700.className}
                 type="number"
                 placeholder="MM"
@@ -51,6 +57,9 @@ export default function Home() {
                 Year
               </label>
               <input
+              
+                id="year"
+                name="year"
                 className={poppins700.className}
                 type="number"
                 placeholder="YYYY"
@@ -60,7 +69,11 @@ export default function Home() {
           <div className={styles.button}>
             <hr color="#dcdcdc" />
             <button>
-              <Image src={iconSVG} alt="Arrow" />
+              <Image
+                src={iconSVG}
+                alt="Arrow"
+                onClick={() => submit(1998, 6, 13)}
+              />
             </button>
             <hr color="#dcdcdc" />
           </div>

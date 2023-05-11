@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Poppins } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import iconSVG from "../public/icon-arrow.svg";
-import useHome from "./hooks";
+import useHome from "../hooks";
 
 const poppins400 = Poppins({
   subsets: ["latin"],

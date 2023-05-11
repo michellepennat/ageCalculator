@@ -1,26 +1,6 @@
-/*
-Sus usuarios deben poder: 
-
-- Ver una edad en años, meses y días tras introducir una fecha válida a través de 
-el formulario
-- Recibir errores de validación si:
-  - Cualquier campo está vacío al enviar el formulario
-  - El número del día no está entre 1-31
-  - El número del mes no está entre 1-12
-  - El año está en el futuro
-  - La fecha no es válida, por ejemplo, 31/04/1991 (abril tiene 30 días).
-- Ver el diseño óptimo de la interfaz en función del tamaño de la pantalla del 
-dispositivo.
-- Ver los estados "hover" y "focus" de todos los elementos interactivos de la página
-- **Bonus**: Ver los números de edad animados a su número final cuando el formulario 
-se envía
-
-Traducción realizada con la versión gratuita del traductor www.DeepL.com/Translator
-*/
-
 import { useState } from "react";
 
-const useHome = () => {
+const useCalculator = () => {
   const [birthdayDay, setBirthdayDay] = useState(0);
   const [errorBirthdayDay, setErrorBirthdayDay] = useState("");
   const [birthdayMonth, setBirthdayMonth] = useState(0);
@@ -144,4 +124,4 @@ const useHome = () => {
   };
 };
 
-export default useHome;
+export default useCalculator;

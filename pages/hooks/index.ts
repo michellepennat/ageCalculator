@@ -18,15 +18,22 @@ se envía
 Traducción realizada con la versión gratuita del traductor www.DeepL.com/Translator
 */
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const useHome = () => {
+  const [birthdayDay, setBirthdayDay] = useState(0);
+  const [errorBirthdayDay, setErrorBirthdayDay] = useState("");
+  const [birthdayMonth, setBirthdayMonth] = useState(0);
+  const [errorBirthdayMonth, setErrorBirthdayMonth] = useState("");
+  const [birthdayYear, setBirthdayYear] = useState(0);
+  const [errorBirthdayYear, setErrorBirthdayYear] = useState("");
+
+  const [age, setAge] = useState(0);
+  const [months, setMonths] = useState(0);
+  const [days, setDays] = useState(0);
+
   /*Validación de edad del usuario*/
-  const submit = (
-    birthYear: number,
-    birthMonth: number,
-    birthdayDay: number
-  ) => {
+  const submit = () => {
     //El siguiente fragmento de codigo lo uso para igualar la fecha de nacimiento con la fecha de hoy del usuario
     let d = new Date(),
       month = 0 + (d.getMonth() + 1),
@@ -34,7 +41,7 @@ const useHome = () => {
       year = d.getFullYear();
 
     const today = new Date(year, month, day);
-    const birthday = new Date(birthYear, birthMonth, birthdayDay);
+    const birthday = new Date(birthdayYear, birthdayMonth, birthdayDay);
     //Calculamos años
     let age = today.getFullYear() - birthday.getFullYear();
     const m = today.getMonth() - birthday.getMonth();
@@ -67,15 +74,73 @@ const useHome = () => {
       days = 30 + days;
     }
 
-    console.log(birthYear, birthMonth, birthdayDay);
-    console.log(year, month, day);
-    console.log(age);
-    console.log(months);
-    console.log(days);
+    setAge(age);
+    setMonths(months);
+    setDays(days);
+  };
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    let today = new Date();
+    let birthDate = new Date(birthdayYear, birthdayMonth - 1, birthdayDay);
+    let valid = true;
+
+    // Validar campos vacíos
+    if (birthdayDay === 0 || birthdayMonth === 0 || birthdayYear === 0) {
+      setErrorBirthdayDay("This field is required");
+      setErrorBirthdayMonth("This field is required");
+      setErrorBirthdayYear("This field is required");
+      valid = false;
+    }
+
+    // Validar que la fecha sea válida
+    if (birthdayDay !== birthDate.getDate() && birthdayDay !== 0) {
+      setErrorBirthdayDay("Must be a valid date.");
+      valid = false;
+    }
+
+    // Validar rango de días
+    if (birthdayDay > 31) {
+      setErrorBirthdayDay("Must be a valid day.");
+      valid = false;
+    }
+
+    // Validar rango de meses
+    if (birthdayMonth !== 0 && (birthdayMonth < 1 || birthdayMonth > 12)) {
+      setErrorBirthdayMonth("Must be a valid month.");
+      valid = false;
+    }
+
+    // Validar que el año no sea mayor al actual
+    if (birthdayYear > today.getFullYear()) {
+      setErrorBirthdayYear("Must be in the past.");
+      valid = false;
+    }
+
+    // Si todo es válido, enviar formulario
+    if (valid) {
+      setErrorBirthdayDay("");
+      setErrorBirthdayMonth("");
+      setErrorBirthdayYear("");
+      submit();
+    }
   };
 
   return {
+    handleSubmit,
+    errorBirthdayDay,
+    errorBirthdayMonth,
+    errorBirthdayYear,
     submit,
+    birthdayDay,
+    setBirthdayDay,
+    birthdayMonth,
+    setBirthdayMonth,
+    birthdayYear,
+    setBirthdayYear,
+    age,
+    months,
+    days,
   };
 };
 

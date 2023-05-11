@@ -13,6 +13,7 @@
   --line: #dcdcdc;
   --black: #151515;
   --purple: #854dff;
+  --red: #ff5959;
 }
 
 * {
@@ -52,4 +53,11 @@ label {
   letter-spacing: 0.25em;
   text-transform: uppercase;
   font-style: normal;
+}
+
+@media (min-width: 1024px) {
+  label {
+    font-size: 14px;
+    line-height: 22px;
+  }
 }

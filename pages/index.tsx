@@ -5,6 +5,15 @@ import styles from "@/styles/Home.module.css";
 import iconSVG from "../public/icon-arrow.svg";
 import useHome from "./hooks";
 
+const poppins400 = Poppins({
+  subsets: ["latin"],
+  weight: ["400"],
+});
+const poppins400italic = Poppins({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["italic"],
+});
 const poppins700 = Poppins({
   subsets: ["latin"],
   weight: ["700"],
@@ -15,7 +24,18 @@ const poppins800 = Poppins({
 });
 
 export default function Home() {
-  const { submit } = useHome();
+  const {
+    handleSubmit,
+    setBirthdayDay,
+    setBirthdayMonth,
+    setBirthdayYear,
+    errorBirthdayDay,
+    errorBirthdayMonth,
+    errorBirthdayYear,
+    age,
+    months,
+    days,
+  } = useHome();
   return (
     <>
       <Head>
@@ -27,80 +47,135 @@ export default function Home() {
       <main className={styles.main}>
         <h1>Age calculator</h1>
         <section className={styles.card}>
-          <form action="" className={styles.form}>
-            <div>
-              <label htmlFor="day" className={poppins700.className}>
-                Day
-              </label>
-              <input
-                id="day"
-                name="day"
-                className={poppins700.className}
-                type="number"
-                placeholder="DD"
-              />
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <div className={styles.formContent}>
+              <div className={styles.formItem}>
+                <label
+                  htmlFor="day"
+                  className={
+                    (errorBirthdayDay ? styles.errorLabel : "") +
+                    " " +
+                    poppins700.className
+                  }
+                >
+                  Day
+                </label>
+                <input
+                  onChange={(e) => setBirthdayDay(+e.target.value)}
+                  id="day"
+                  name="day"
+                  className={
+                    (errorBirthdayDay ? styles.error : "") +
+                    " " +
+                    poppins700.className
+                  }
+                  type="number"
+                  placeholder="DD"
+                />
+                {errorBirthdayDay && (
+                  <p className={poppins400italic.className}>
+                    {errorBirthdayDay}
+                  </p>
+                )}
+              </div>
+              <div className={styles.formItem}>
+                <label
+                  htmlFor="month"
+                  className={
+                    (errorBirthdayDay ? styles.errorLabel : "") +
+                    " " +
+                    poppins700.className
+                  }
+                >
+                  Month
+                </label>
+                <input
+                  onChange={(e) => setBirthdayMonth(+e.target.value)}
+                  id="month"
+                  name="month"
+                  className={
+                    (errorBirthdayDay ? styles.error : "") +
+                    " " +
+                    poppins700.className
+                  }
+                  type="number"
+                  placeholder="MM"
+                />
+                {errorBirthdayMonth && (
+                  <p className={poppins400italic.className}>
+                    {errorBirthdayMonth}
+                  </p>
+                )}
+              </div>
+              <div className={styles.formItem}>
+                <label
+                  htmlFor="year"
+                  className={
+                    (errorBirthdayDay ? styles.errorLabel : "") +
+                    " " +
+                    poppins700.className
+                  }
+                >
+                  Year
+                </label>
+                <input
+                  onChange={(e) => setBirthdayYear(+e.target.value)}
+                  id="year"
+                  name="year"
+                  className={
+                    (errorBirthdayDay ? styles.error : "") +
+                    " " +
+                    poppins700.className
+                  }
+                  type="number"
+                  placeholder="YYYY"
+                />
+                {errorBirthdayYear && (
+                  <p className={poppins400italic.className}>
+                    {errorBirthdayYear}
+                  </p>
+                )}
+              </div>
             </div>
-            <div>
-              <label htmlFor="month" className={poppins700.className}>
-                Month
-              </label>
-              <input
-                id="month"
-                name="month"
-                className={poppins700.className}
-                type="number"
-                placeholder="MM"
-              />
-            </div>
-            <div>
-              <label htmlFor="year" className={poppins700.className}>
-                Year
-              </label>
-              <input
-              
-                id="year"
-                name="year"
-                className={poppins700.className}
-                type="number"
-                placeholder="YYYY"
-              />
+            <div className={styles.button}>
+              <hr color="#dcdcdc" />
+              <button type="submit">
+                <Image src={iconSVG} alt="Arrow" />
+              </button>
+              <hr className={styles.hidden} color="#dcdcdc" />
             </div>
           </form>
-          <div className={styles.button}>
-            <hr color="#dcdcdc" />
-            <button>
-              <Image
-                src={iconSVG}
-                alt="Arrow"
-                onClick={() => submit(1998, 6, 13)}
-              />
-            </button>
-            <hr color="#dcdcdc" />
-          </div>
           <div className={styles.text}>
-            <h2 className={poppins800.className}>--</h2>{" "}
+            <h2 className={poppins800.className}>{age == 0 ? "--" : age}</h2>
             <h3 className={poppins800.className}>years</h3>
           </div>
           <div className={styles.text}>
-            <h2 className={poppins800.className}>--</h2>{" "}
+            <h2 className={poppins800.className}>
+              {months == 0 ? "--" : months}
+            </h2>
             <h3 className={poppins800.className}>months</h3>
           </div>
           <div className={styles.text}>
-            <h2 className={poppins800.className}>--</h2>{" "}
+            <h2 className={poppins800.className}>{days == 0 ? "--" : days}</h2>
             <h3 className={poppins800.className}>days</h3>
           </div>
         </section>
         <div className={styles.attribution}>
-          Challenge by
+          <p className={poppins400.className}>Challenge by &nbsp;</p>
           <a
+            className={poppins400.className}
             href="https://www.frontendmentor.io/challenges/results-summary-component-CE_K6s0maV"
             target="_blank"
           >
-            {" "}
             Frontend Mentor
           </a>
-          . Coded by{" "}
-          <a href="https://github.com/michellepennat">Michelle Penna</a>.
+          <p className={poppins400.className}>. Coded by &nbsp;</p>
+          <a
+            className={poppins400.className}
+            href="https://github.com/michellepennat"
+          >
+            Michelle Penna.
+          </a>
         </div>
       </main>
     </>
